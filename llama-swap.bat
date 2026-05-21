@@ -1,0 +1,13 @@
+@REM pwd
+
+docker pull ghcr.io/mostlygeek/llama-swap:v192-cuda-b8087
+
+@REM configuration hot reload supported with a directory volume mount
+docker run -it --runtime nvidia --name llama-swap --restart always -d -p 9292:8080 ^
+    -v ./models:/models ^
+    -v ./config:/config ^
+    -v /var/run/docker.sock:/var/run/docker.sock ^
+    ghcr.io/mostlygeek/llama-swap:v192-cuda-b8087 -config /config/config_llama.yaml -watch-config
+
+docker exec -it llama-swap apt-get update
+docker exec -it llama-swap apt-get install docker.io -y
