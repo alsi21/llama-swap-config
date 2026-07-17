@@ -12,27 +12,9 @@ apiKeys:
   - "sk-d2V0bmF0dXJhbGx5bHVuZ3NwYXJ0aWN1bGFyc2ltcGxlZnV0dXJlbGVuZ3RocG9z"
 
 models:
-  sw3-20B-instruct:
+  gemma-3-4b-it:
     proxy: "http://host.docker.internal:${PORT}"
-    useModelName: "AI-Sweden-Models/gpt-sw3-20b-instruct"
-    cmd: >
-      docker run 
-      --runtime nvidia 
-      --gpus all
-      --name ${MODEL_ID}
-      --rm
-      -p ${PORT}:5800
-      -v C:/Users/albin/Documents/Projects/llm/models:/models
-      ghcr.io/ggml-org/llama.cpp:server-cuda
-      -m /models/sw3-20B-instruct/gpt-sw3-20b-instruct-Q4_K_M.gguf
-      -c 512
-      --port 5800
-      --n-gpu-layers 99
-      --chat-template /models/sw3-20B-instruct/chat_template.jinja
-    cmdStop: docker stop ${MODEL_ID}
-  gemma3-12B-instruct:
-    proxy: "http://host.docker.internal:${PORT}"
-    useModelName: "AI-Sweden-Models/gemma3-12b-instruct"
+    useModelName: "google/gemma-3-4b-it"
     cmd: >
       docker run
       --runtime nvidia  
@@ -42,12 +24,45 @@ models:
       -p ${PORT}:5800
       -v C:/Users/albin/Documents/Projects/llm/models:/models
       ghcr.io/ggml-org/llama.cpp:server-cuda
-      -m /models/gemma-3-12b-it/gemma-3-12b-it-Q4_K_M.gguf
-      -c 512
+      -m /models/bulk/gemma-3-4b-it-Q4_K_M.gguf
       --port 5800
-      --n-gpu-layers 99
-      --chat-template /models/gemma-3-12b-it/chat_template.jinja
+      --jinja
     cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  gemma-3-12b-it:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "google/gemma-3-12b-it"
+    cmd: >
+      docker run
+      --runtime nvidia  
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/gemma-3-12b-it-Q4_K_M.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  gemma-4-12b-it:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "google/gemma-4-12b-it"
+    cmd: >
+      docker run
+      --runtime nvidia  
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/gemma-4-12b-it-Q4_K_M.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
   gpt-oss-20b:
     proxy: "http://host.docker.internal:${PORT}"
     useModelName: "openai/gpt-oss-20b"
@@ -60,9 +75,110 @@ models:
       -p ${PORT}:5800
       -v C:/Users/albin/Documents/Projects/llm/models:/models
       ghcr.io/ggml-org/llama.cpp:server-cuda
-      -m /models/gpt-oss-20b/gpt-oss-20b-Q4_K_M.gguf
-      -c 512
+      -m /models/bulk/gpt-oss-20b-Q4_K_M.gguf
       --port 5800
-      --n-gpu-layers 99
-      --chat-template /models/gpt-oss-20b/chat_template.jinja
+      --jinja
     cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  sw3-6.7b-v2-instruct:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "AI-Sweden-Models/gpt-sw3-6.7b-v2-instruct"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/gpt-sw3-6.7b-v2-instruct-Q4_K_M.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  sw3-20b-instruct:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "AI-Sweden-Models/gpt-sw3-20b-instruct"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/gpt-sw3-20b-instruct-Q4_K_M.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  granite-guardian-3-8b:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "ibm-granite/granite-guardian-3.0-8b"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/granite-guardian-3.0-8b-q4_k_m.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  llama-guard-3-8b:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "meta-llama/Llama-Guard-3-8B"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/llama-guard-3-8b-q4_k_m.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  ministral-3-14b-instruct-2512:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "mistralai/Ministral-3-14B-Instruct-2512"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/Ministral-3-14B-Instruct-2512-Q4_K_M.gguf
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
+  mistral-7b-instruct:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "mistralai/Mistral-7B-Instruct-v0.3"
+    cmd: >
+      docker run 
+      --runtime nvidia 
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/Mistral-7B-Instruct-v0.3.Q4_K_M.gguf"
+      --port 5800
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
