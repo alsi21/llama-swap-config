@@ -202,3 +202,21 @@ models:
       --jinja
     cmdStop: docker stop ${MODEL_ID}
       # -c 512
+  judge-gemma-4-12b-it:
+    proxy: "http://host.docker.internal:${PORT}"
+    useModelName: "google/gemma-4-12b-it"
+    cmd: >
+      docker run
+      --runtime nvidia  
+      --gpus all
+      --name ${MODEL_ID}
+      --rm
+      -p ${PORT}:5800
+      -v C:/Users/albin/Documents/Projects/llm/models:/models
+      ghcr.io/ggml-org/llama.cpp:server-cuda
+      -m /models/bulk/gemma-4-12b-it-Q4_K_M.gguf
+      --port 5800
+      --keep -1
+      --jinja
+    cmdStop: docker stop ${MODEL_ID}
+      # -c 512
