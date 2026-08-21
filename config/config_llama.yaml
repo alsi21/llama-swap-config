@@ -138,7 +138,7 @@ models:
       -p ${PORT}:5800
       -v C:/Users/albin/Documents/Projects/llm/models:/models
       ghcr.io/ggml-org/llama.cpp:server-cuda
-      -m /models/bulk/granite-guardian-3.0-8b-q4_k_m.gguf
+      -m /models/bulk_guards/granite-guardian-3.0-8b-q4_k_m.gguf
       --port 5800
       -c 2048
       --keep -1
@@ -157,7 +157,7 @@ models:
       -p ${PORT}:5800
       -v C:/Users/albin/Documents/Projects/llm/models:/models
       ghcr.io/ggml-org/llama.cpp:server-cuda
-      -m /models/bulk/llama-guard-3-8b-q4_k_m.gguf
+      -m /models/bulk_guards/llama-guard-3-8b-q4_k_m.gguf
       --port 5800
       -c 2048
       --keep -1
